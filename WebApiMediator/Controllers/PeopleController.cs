@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using SimpleSoft.Mediator;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,15 +19,29 @@ namespace WebApiMediator.Controllers
     public class PeopleController : ControllerBase
     {
         public IMediator Mediator { get; }
+        public IMemoryCache Cache { get; }
 
-        public PeopleController(IMediator mediator)
+        public PeopleController(IMediator mediator, IMemoryCache cache)
         {
             Mediator = mediator;
+            Cache = cache;
         }
         [HttpGet]
+        
         public async Task<IEnumerable<People>> Get(CancellationToken ct)
-        {
-            return await Mediator.FetchAsync(new QueryPeoples(), ct);
+        {           
+            //if (!Cache.TryGetValue<IEnumerable<People>>("CachePeopleList", out IEnumerable<People> peoples))
+            //{
+            //    peoples = 
+            //    Cache.Set<IEnumerable<People>>("CachePeopleList",
+            //        peoples,
+            //        new MemoryCacheEntryOptions
+            //        {
+            //            AbsoluteExpiration = DateTime.Now.AddSeconds(30)
+            //        });
+            //}
+            return await Mediator.FetchAsync(new QueryPeoples(), ct); ;
+            
         }
 
         [HttpGet("{id}")]

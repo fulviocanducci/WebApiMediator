@@ -23,6 +23,7 @@ namespace WebApiMediator
             services.AddDbContextBaseMediator(Configuration);
             services.AddControllers();
             services.AddSwaggerGen();
+            services.AddMemoryCache();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
