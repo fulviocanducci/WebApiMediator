@@ -26,7 +26,11 @@ namespace WebApiMediatR
                 config.UseSqlServer(Configuration.GetConnectionString("BaseMediatorConnectionString"));
             });
             services.AddScoped<IRepositoryPeople, RepositoryPeople>();
-            services.AddRouting(config => config.LowercaseUrls = true);
+            services.AddRouting(config =>
+            {
+                config.LowercaseUrls = true;
+                config.LowercaseQueryStrings = true;
+            });
             services.AddMediatR(typeof(Startup));
             services.AddControllers();
             services.AddSwaggerGen();
