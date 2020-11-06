@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using SimpleSoft.Mediator;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,7 +39,7 @@ namespace WebApiMediator.Controllers
             //            AbsoluteExpiration = DateTime.Now.AddSeconds(30)
             //        });
             //}
-            return await Mediator.FetchAsync(new QueryPeoples(), ct); ;
+            return await Mediator.FetchAsync(new QueryPeoples(), ct);
             
         }
 
